@@ -1,11 +1,17 @@
-# Dockerfile (วางไฟล์นี้กับ GreenBikeApp.html ในเดียวกัน)
+# ใช้ nginx เป็น base image
 FROM nginx:alpine
 
-# คัดลอกไฟล์ HTML ของคุณไปเป็น index.html ของ nginx
-COPY GreenBikeApp.html /usr/share/nginx/html/index.html
+# กำหนด working directory
+WORKDIR /usr/share/nginx/html
 
-# เปิดพอร์ต 80
+# ลบไฟล์ default ของ nginx
+RUN rm -rf ./*
+
+# คัดลอกไฟล์ HTML เข้าไปใน container
+COPY GreenBike_App.html ./index.html
+
+# expose port 80 (Render จะใช้)
 EXPOSE 80
 
-# รัน nginx แบบ foreground
+# ใช้ nginx เป็น web server
 CMD ["nginx", "-g", "daemon off;"]
