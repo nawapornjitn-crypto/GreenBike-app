@@ -1,10 +1,9 @@
 FROM nginx:alpine
 WORKDIR /usr/share/nginx/html
 
-# ลบไฟล์ default ออก
 RUN rm -rf ./*
 
-# คัดลอกไฟล์ HTML ของคุณ (ชื่อไฟล์ต้องตรงกัน)
+# ใช้ชื่อไฟล์ให้ตรงกับ repo: GreenBikeApp.html
 COPY GreenBikeApp.html ./index.html
 
 EXPOSE 80
